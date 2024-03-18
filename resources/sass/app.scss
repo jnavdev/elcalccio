@@ -1,0 +1,33 @@
+// Custom
+@import 'custom.css';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Font Awesome
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// AdminLTE
+@import '~admin-lte/dist/css/adminlte.css';
+
+// Select2
+@import '~admin-lte/plugins/select2/css/select2.css';
+@import '~admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.css';
+
+// DataTables
+@import '~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css';
+@import '~admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.css';
+@import '~admin-lte/plugins/datatables-rowgroup/css/rowGroup.bootstrap4.css';
+
+// SweetAlert
+@import '~admin-lte/plugins/sweetalert2/sweetalert2.css';
+@import '~admin-lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css';
+
+// Gijgo
+@import '~gijgo/css/gijgo.css';

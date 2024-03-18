@@ -1,0 +1,2 @@
+[21-Dec-2022 16:38:59 America/Santiago] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 69632 bytes) in /home/elcalccio/repositories/elcalccio/vendor/dompdf/dompdf/lib/Cpdf.php on line 3378
+[21-Dec-2022 16:39:17 America/Santiago] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 36864 bytes) in /home/elcalccio/repositories/elcalccio/vendor/composer/ClassLoader.php on line 571
