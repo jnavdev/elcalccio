@@ -127,6 +127,7 @@ Route::middleware(['auth', 'check-user', 'check-permission'])->group(function ()
             Route::get('/edit/proxy/{proxy_id}', [YoungStudentController::class, 'editProxy'])->name('young_students.edit.proxy');
             Route::post('/update/proxy/{proxy_id}', [YoungStudentController::class, 'updateProxy'])->name('young_students.update.proxy');
             Route::post('/date-of-birth-pdf', [YoungStudentController::class, 'dateOfBirthPdf'])->name('young_students.date_of_birth_pdf');
+            Route::delete('delete/{id}', [YoungStudentController::class, 'delete'])->name('young_students.delete');
         });
 
         // Adult students
@@ -138,6 +139,7 @@ Route::middleware(['auth', 'check-user', 'check-permission'])->group(function ()
             Route::put('/{id}', [AdultStudentController::class, 'update'])->name('adult_students.update');
             Route::get('/{id}', [AdultStudentController::class, 'show'])->name('adult_students.show');
             Route::delete('/{id}', [AdultStudentController::class, 'destroy'])->name('adult_students.destroy');
+            Route::delete('delete/{id}', [AdultStudentController::class, 'delete'])->name('adult_students.delete');
         });
 
         // Subscriptions

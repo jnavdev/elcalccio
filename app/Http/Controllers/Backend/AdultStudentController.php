@@ -45,8 +45,9 @@ class AdultStudentController extends Controller
                 ->addColumn('action', function ($row) {
                     $buttons = "<button class='btn btn-sm btn-info btn-detail' data-id='{$row->id}' title='Detalle'><i class='fas fa-eye'></i></button> ";
                     $buttons .= "<a class='btn btn-sm btn-primary' href='" . route('adult_students.edit', $row->id) . "' title='Editar'><i class='fas fa-pencil'></i></a> ";
+                    $buttons .= "<button class='btn btn-sm btn-danger delete-student' data-id='{$row->id}' title='Eliminar'><i class='fas fa-trash'></i></button> ";
 
-                    $deleteButton = "<button class='btn btn-sm btn-danger btn-delete' data-id='{$row->id}' title='Desactivar'><i class='fas fa-close'></i> Desactivar</button>";
+                    $deleteButton = "<button class='btn btn-sm btn-warning btn-delete' data-id='{$row->id}' title='Desactivar'><i class='fas fa-close'></i> Desactivar</button>";
 
                     if (!$row->is_active) {
                         $deleteButton = "<button class='btn btn-sm btn-success btn-delete' data-id='{$row->id}' title='Activar'><i class='fas fa-check'></i> Activar</button>";
@@ -241,6 +242,24 @@ class AdultStudentController extends Controller
         }
 
         flasher(Lang::get('messages.crud.updated'), 'success');
+        return to_route('adult_students.index');
+    }
+
+    public function delete($id)
+    {
+        $student = Student::with('proxies', 'subscriptions')->find($id);
+
+        if ($student->proxies->count()) {
+            $student->proxies()->delete();
+        }
+
+        if ($student->subscriptions->count()) {
+            $student->subscriptions()->delete();
+        }
+
+        $student->delete();
+
+        flasher(Lang::get('messages.crud.deleted'), 'success');
         return to_route('adult_students.index');
     }
 }

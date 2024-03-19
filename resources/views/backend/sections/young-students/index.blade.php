@@ -145,6 +145,11 @@
         @csrf
     </form>
 
+    <form action="#" method="POST" id="delete-student" style="display: none;">
+        @method('DELETE')
+        @csrf
+    </form>
+
     @include('backend.sections.young-students.show')
     @include('backend.sections.young-students.proxy')
 @endsection
@@ -247,7 +252,7 @@
                 oTable.fnDraw(false);
             });
 
-            $('#filter_course_id').change(function () {
+            $('#filter_course_id').change(function() {
                 var oTable = $('#table').dataTable();
                 oTable.fnDraw(false);
             });
@@ -392,6 +397,26 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#delete-form').submit();
+                    }
+                });
+            });
+
+            $('#table tbody').on('click', '.delete-student', function() {
+                let id = $(this).data('id');
+                let url = route('young_students.delete', id);
+                $('#delete-student').attr('action', url);
+
+                Swal.fire({
+                    title: '¿Eliminar?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Si'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#delete-student').submit();
                     }
                 });
             });

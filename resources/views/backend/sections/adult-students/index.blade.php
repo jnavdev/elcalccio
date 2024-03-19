@@ -87,6 +87,11 @@
         @csrf
     </form>
 
+    <form action="#" method="POST" id="delete-student" style="display: none;">
+        @method('DELETE')
+        @csrf
+    </form>
+
     @include('backend.sections.adult-students.show')
 @endsection
 
@@ -229,6 +234,26 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#delete-form').submit();
+                    }
+                });
+            });
+
+            $('#table tbody').on('click', '.delete-student', function() {
+                let id = $(this).data('id');
+                let url = route('adult_students.delete', id);
+                $('#delete-student').attr('action', url);
+
+                Swal.fire({
+                    title: '¿Eliminar?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Si'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#delete-student').submit();
                     }
                 });
             });
