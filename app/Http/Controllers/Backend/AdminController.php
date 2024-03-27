@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\Backend\Admin\ChangePasswordRequest;
+use Illuminate\Support\Facades\Crypt;
+use App\Models\Commune;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -71,5 +74,50 @@ class AdminController extends Controller
     public function loginView()
     {
         return view('backend.auth.login');
+    }
+
+    public function parentStudentForm($encryptedId)
+    {
+        $id = Crypt::decryptString($encryptedId);
+        $student = Student::find($id);
+        $communes = Commune::select('name', 'id')->orderBy('name', 'ASC')->get();
+
+        return view('backend.parent-update-student', compact('student', 'communes', 'encryptedId'));
+    }
+
+    public function parentStudentUpdate(Request $request, $encryptedId)
+    {
+        $id = Crypt::decryptString($encryptedId);
+
+        $request->validate([
+            'full_name' => ['required', 'max:255'],
+            'rut' => ['required', 'cl_rut', Rule::unique('students', 'rut')->ignore($id)],
+            'birth_date' => ['required'],
+            'commune_id' => ['required'],
+            'address' => ['required', 'max:255'],
+            'shirt_size' => ['required'],
+            'pants_size' => ['required'],
+            'shirt_number' => ['required'],
+        ]);
+
+        $student = Student::find($id);
+        $student->update([
+            'full_name' => $request->input('full_name'),
+            'rut' => $request->input('rut'),
+            'birth_date' => $request->input('birth_date'),
+            'commune_id' => $request->input('commune_id'),
+            'address' => $request->input('address'),
+            'shirt_size' => $request->input('shirt_size'),
+            'pants_size' => $request->input('pants_size'),
+            'shirt_number' => $request->input('shirt_number'),
+            'disability' => $request->input('disability'),
+            'diseases' => $request->input('diseases'),
+            'medicines' => $request->input('medicines'),
+            'allergies' => $request->input('allergies'),
+            'blood_type' => $request->input('blood_type'),
+        ]);
+
+        flasher(Lang::get('messages.crud.updated'), 'success');
+        return to_route('frontend.home');
     }
 }

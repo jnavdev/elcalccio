@@ -13,6 +13,7 @@ use App\Http\Requests\Backend\Student\Young\StoreRequest;
 use App\Http\Requests\Backend\Student\Young\UpdateRequest;
 use App\Http\Requests\Backend\Student\Young\UpdateProxyRequest;
 use App\Models\Course;
+use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image as ImageIntervention;
 use Illuminate\Support\Facades\Lang;
 
@@ -219,9 +220,13 @@ class YoungStudentController extends Controller
             'address' => $queryProxy->address
         ];
 
+        $encryptedId = Crypt::encryptString($id);
+        $routeParentStudent = route('parent_update_student_form', $encryptedId);
+
         return [
             'student' => $student,
-            'proxy' => $proxy
+            'proxy' => $proxy,
+            'routeParentStudent' => $routeParentStudent
         ];
     }
 

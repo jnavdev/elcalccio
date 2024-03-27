@@ -34,6 +34,9 @@ Route::get('login', function () {
     return to_route('admin.login');
 })->name('login');
 
+Route::get('/update-student/{encryptedId}', [AdminController::class, 'parentStudentForm'])->name('parent_update_student_form');
+Route::put('/update-student/{encryptedId}', [AdminController::class, 'parentStudentUpdate'])->name('parent_update_student_action');
+
 Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
 Route::get('/calendario-reservas/{date?}/{stadium_id?}', [ReservationFrontendController::class, 'reservationsCalendar'])->name('frontend.reservations_calendar');
 Route::post('/guardar-reserva', [ReservationFrontendController::class, 'saveSession'])->name('frontend.reservations_save');

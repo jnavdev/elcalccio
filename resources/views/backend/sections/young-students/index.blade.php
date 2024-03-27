@@ -169,6 +169,32 @@
         }
 
         $(function() {
+            // Tooltip
+            $('btn-parents').tooltip({
+                trigger: 'click',
+                placement: 'bottom'
+            });
+
+            function setTooltip(message) {
+                $('.btn-parents').tooltip('hide')
+                    .attr('data-original-title', message)
+                    .tooltip('show');
+            }
+
+            function hideTooltip() {
+                setTimeout(function() {
+                    $('.btn-parents').tooltip('hide');
+                }, 1000);
+            }
+
+            // Clipboard
+            var clipboard = new ClipboardJS('.btn-parents');
+
+            clipboard.on('success', function(e) {
+                setTooltip('Link Copiado!');
+                hideTooltip();
+            });
+
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -267,12 +293,15 @@
             });
 
             $('#table tbody').on('click', '.btn-detail', function() {
-                let id = $(this).data('id');
-                let url = route('young_students.show', id);
+                const id = $(this).data('id');
+                const url = route('young_students.show', id);
+                const btnParents = document.querySelector(".btn-parents");
 
                 $.get(url, function(data) {
-                    var student = data['student'];
-                    var proxy = data['proxy'];
+                    let student = data['student'];
+                    let proxy = data['proxy'];
+
+                    btnParents.dataset.clipboardText = data['routeParentStudent'];
 
                     $('#detail_profile_picture').html(
                         '<img style="width: 200px; height: 250px;" class="rounded mx-auto d-block" src="' +

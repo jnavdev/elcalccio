@@ -283,6 +283,9 @@ return [
         'product_category_id' => 'categoría',
         'cost_price' => 'precio costo',
         'sale_price' => 'precio venta',
-        'stadium_id' => 'cancha'
+        'stadium_id' => 'cancha',
+        'shirt_size' => 'talla camiseta',
+        'pants_size' => 'talla pantalón',
+        'shirt_number' => 'dorsal'
     ],
 ];

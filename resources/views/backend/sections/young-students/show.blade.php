@@ -10,6 +10,16 @@
 
             <div class="modal-body">
                 <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-sm btn-secondary btn-parents" data-clipboard-text=""><i
+                                class="fa fa-copy"></i>
+                            Completar datos apoderado</button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
                     <div class="col-md-6">
                         <h5><span class="badge badge-primary">Datos personales</span></h5>
 
