@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn btn-sm btn-secondary btn-parents" data-clipboard-text=""><i
-                                class="fa fa-copy"></i>
+                        <button class="btn btn-sm btn-secondary btn-parents" data-copy-text="" type="button"
+                            onclick="copyToClipboard()"><i class="fa fa-copy"></i>
                             Completar datos apoderado</button>
                     </div>
                 </div>

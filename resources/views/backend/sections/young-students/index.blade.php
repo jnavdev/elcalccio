@@ -168,31 +168,24 @@
             });
         }
 
+        function copyToClipboard() {
+            // Get the text field
+            const button = document.querySelector(".btn-parents");
+            const url = button.dataset.clipboardText;
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(url);
+
+            $('.btn-parents').tooltip('hide')
+                .attr('data-original-title', 'Link copiado!')
+                .tooltip('show');
+        }
+
         $(function() {
             // Tooltip
             $('btn-parents').tooltip({
                 trigger: 'click',
                 placement: 'bottom'
-            });
-
-            function setTooltip(message) {
-                $('.btn-parents').tooltip('hide')
-                    .attr('data-original-title', message)
-                    .tooltip('show');
-            }
-
-            function hideTooltip() {
-                setTimeout(function() {
-                    $('.btn-parents').tooltip('hide');
-                }, 1000);
-            }
-
-            // Clipboard
-            var clipboard = new ClipboardJS('.btn-parents');
-
-            clipboard.on('success', function(e) {
-                setTooltip('Link Copiado!');
-                hideTooltip();
             });
 
             $('#table').DataTable({
